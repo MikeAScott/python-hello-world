@@ -2,7 +2,8 @@
 
 # must sudo to run
 
-SITE="flaskhelloworldsite.com"
+SITE="helloworld"
+TLD =".app"
 APP="helloworldapp"
 SITE_PATH="/var/www/$SITE"
 CONF_FILE="$SITE.conf"
@@ -20,11 +21,17 @@ if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
   ln -s /etc/httpd/sites-available/$CONF_FILE /etc/httpd/sites-enabled/$CONF_FILE
 fi
 
-cp conf/helloworldapp.wsgi /var/www/FLASKAPPS/$APP/
-cp server.py /var/www/FLASKAPPS/$APP/
+pushd $SITE_PATH
+virtualenv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+popd
 
-if ! grep -qF "$SITE" /etc/hosts; then
-  echo "127.0.0.1 $SITE" >> /etc/hosts
+cp conf/helloworldapp.wsgi $SITE_PATH/venv/
+cp server.py $SITE_PATH/venv/
+
+if ! grep -qF "$SITE.$TLD" /etc/hosts; then
+  echo "127.0.0.1 $SITE.$TLD" >> /etc/hosts
 fi
 
 chown -R apache:apache $SITE_PATH
