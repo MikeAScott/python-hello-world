@@ -2,7 +2,7 @@
 
 # must sudo to run
 
-SITE="pyhelloworld"
+SITE="helloworld"
 TLD="local"
 APP="helloworldapp"
 SITE_PATH="/var/www/$SITE"
@@ -13,8 +13,10 @@ SOURCE=$(pwd)
 mkdir -p /etc/httpd/sites-available 
 mkdir -p /etc/httpd/sites-enabled
 mkdir -p $SITE_PATH
+mkdir -p $SITE_PATH/wsgi
 mkdir -p $SITE_PATH/logs
 
+# use a2ensite ? a2ensite $CONF_FILE
 cp conf/$CONF_FILE /etc/httpd/sites-available/
 
 if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
@@ -24,8 +26,8 @@ fi
 /usr/local/bin/virtualenv $SITE_PATH/venv
 source $SITE_PATH/venv/bin/activate
 pip3 install -r requirements.txt
-cp conf/helloworldapp.wsgi $SITE_PATH/venv/
-cp server.py $SITE_PATH/venv/
+cp conf/helloworldapp.wsgi $SITE_PATH/wsgi/
+cp server.py $SITE_PATH/
 
 if ! grep -qF "$SITE.$TLD" /etc/hosts; then
   echo "127.0.0.1 $SITE.$TLD" >> /etc/hosts
