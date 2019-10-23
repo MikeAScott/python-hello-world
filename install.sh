@@ -26,7 +26,7 @@ fi
 /usr/local/bin/virtualenv $SITE_PATH/venv
 source $SITE_PATH/venv/bin/activate
 pip3 install -r requirements.txt
-cp conf/helloworldapp.wsgi $SITE_PATH/wsgi/
+cp wsgi/helloworldapp.wsgi $SITE_PATH/wsgi/
 cp server.py $SITE_PATH/
 
 if ! grep -qF "$SITE.$TLD" /etc/hosts; then
