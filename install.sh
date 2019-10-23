@@ -11,7 +11,6 @@ CONF_FILE="$SITE.conf"
 
 mkdir -p /etc/httpd/sites-available 
 mkdir -p /etc/httpd/sites-enabled
-mkdir -p /var/www/FLASKAPPS/$APP
 mkdir -p $SITE_PATH
 mkdir -p $SITE_PATH/logs
 
