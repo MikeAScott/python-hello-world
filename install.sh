@@ -2,11 +2,12 @@
 
 # must sudo to run
 
-SITE="helloworld"
-TLD =".app"
+SITE="pyhelloworld"
+TLD="local"
 APP="helloworldapp"
 SITE_PATH="/var/www/$SITE"
 CONF_FILE="$SITE.conf"
+SOURCE=$(pwd)
 
 
 mkdir -p /etc/httpd/sites-available 
@@ -20,12 +21,9 @@ if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
   ln -s /etc/httpd/sites-available/$CONF_FILE /etc/httpd/sites-enabled/$CONF_FILE
 fi
 
-pushd $SITE_PATH
-virtualenv venv
-source venv/bin/activate
+/usr/local/bin/virtualenv $SITE_PATH/venv
+source $SITE_PATH/venv/bin/activate
 pip3 install -r requirements.txt
-popd
-
 cp conf/helloworldapp.wsgi $SITE_PATH/venv/
 cp server.py $SITE_PATH/venv/
 
