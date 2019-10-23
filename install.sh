@@ -14,7 +14,6 @@ mkdir -p /var/www/FLASKAPPS/$APP
 mkdir -p $SITE_PATH
 mkdir -p $SITE_PATH/logs
 
-
 cp conf/$CONF_FILE /etc/httpd/sites-available/
 
 if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
@@ -22,6 +21,7 @@ if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
 fi
 
 cp conf/helloworldapp.wsgi /var/www/FLASKAPPS/$APP/
+cp __init__.py /var/www/FLASKAPPS/$APP/
 
 if ! grep -qF "$SITE" /etc/hosts; then
   echo "127.0.0.1 $SITE" >> /etc/hosts
