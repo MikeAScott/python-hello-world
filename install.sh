@@ -21,7 +21,7 @@ if [ ! -f /etc/httpd/sites-enabled/$CONF_FILE ]; then
 fi
 
 cp conf/helloworldapp.wsgi /var/www/FLASKAPPS/$APP/
-cp __init__.py /var/www/FLASKAPPS/$APP/
+cp server.py /var/www/FLASKAPPS/$APP/
 
 if ! grep -qF "$SITE" /etc/hosts; then
   echo "127.0.0.1 $SITE" >> /etc/hosts
