@@ -11,9 +11,9 @@ SOURCE=$(pwd)
 mkdir -p /etc/httpd/sites-available 
 mkdir -p /etc/httpd/sites-enabled
 mkdir -p $SITE_PATH
-mkdir $SITE_PATH/wsgi
-mkdir $SITE_PATH/static
-mkdir $SITE_PATH/logs
+mkdir -p $SITE_PATH/wsgi
+mkdir -p $SITE_PATH/static
+mkdir -p $SITE_PATH/logs
 
 semanage fcontext -a -t httpd_sys_rw_content_t $SITE_PATH/logs
 restorecon -v $SITE_PATH/logs
@@ -28,8 +28,8 @@ fi
 /usr/local/bin/virtualenv $SITE_PATH/venv
 source $SITE_PATH/venv/bin/activate
 pip3 install -r requirements.txt
-cp wsgi/helloworldapp.wsgi $SITE_PATH/wsgi/
-cp -r static/ $SITE_PATH/static/
+cp -r wsgi/ $SITE_PATH
+cp -r static/ $SITE_PATH
 
 cp server.py $SITE_PATH/
 
