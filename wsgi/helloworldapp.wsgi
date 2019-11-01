@@ -9,5 +9,5 @@ with open(activate_this) as file_:
 
 sys.stdout = sys.stderr
 
-sys.path.append('var/www/helloworld')
+sys.path.append('var/www/helloworld/app')
 from server import app as application
